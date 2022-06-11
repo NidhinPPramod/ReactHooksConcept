@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect} from "react";
+import useForms from "./components/useForms"
 
 function App() {
+
+    const[value,handleChange]=useForms({
+        firstname:"",
+        lastname:"",
+    })
+
+    useEffect(()=>{
+        console.log("running")
+    },[value.lastname])
+
+    const handleClick=(event)=>{
+        event.preventDefault()
+        console.log(value)
+    }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+     <form autoComplete="off">
+         <input type="text" name="firstname" value={value.firstname} onChange={handleChange}/>
+         <input type="text" name="lastname" value={value.lastname} onChange={handleChange}/>
+         <button onClick={handleClick}>Display</button>
+     </form>
     </div>
   );
 }
